@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goolists</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+
+<body class="flex flex-col justify-center items-center gap-10 bg-black font-inter">  
+    <h1 class="text-3xl text-white font-semibold">GOOLISTS</h1>
+    <div class="rounded-[30px] bg-white flex overflow-hidden">
+        <input type="text" class="outline-none px-4 py-1 m-0 bg-none text-sm flex-1">
+        <button onclick="search()" class="bg-blue-500 p-2 flex justify-center items-center outline-none rounded-[20px] m-[2px]"><img class="w-4" src="search.png" alt="search"></button>
+    </div>
+    
+    <div class="flex gap-2">
+
+   
+    <label class="text-white" for="code">
+        <input type="checkbox" name="code" id="code">
+        ‍👨‍💻 code
+        <button onclick="((e) => {
+           document.getElementById('code-details').classList.toggle('hidden') 
+        })()" class="text-xs bg-gray-200 text-black w-4 h-4 text-center inline-block rounded-full">?</button>
+        <ul id="code-details" class="hidden text-sm text-gray-500">
+            <li>github.com</li>
+            <li>stackoverflow.com</li>
+        </ul>
+    </label>
+    <label class="text-white" for="design">
+        <input type="checkbox" name="design" id="design">
+        🎨 design
+        <button onclick="((e) => {
+        document.getElementById('design-details').classList.toggle('hidden');
+    })()" class="text-xs bg-gray-200 text-black w-4 h-4 text-center inline-block rounded-full">?</button>
+        <ul id="design-details" class="hidden text-sm text-gray-500">
+            <li>behance.net</li>
+            <li>dribbble.com</li>
+        </ul>
+    </label>
+    <label class="text-white" for="shop">
+        <input type="checkbox" name="shop" id="shop">
+        🛍️ shop
+        <button onclick="((e) => {
+        document.getElementById('shop-details').classList.toggle('hidden');
+    })()" class="text-xs bg-gray-200 text-black w-4 h-4 text-center inline-block rounded-full">?</button>
+        <ul id="shop-details" class="hidden text-sm text-gray-500">
+            <li>flipkart.in</li>
+            <li>amazon.in</li>
+        </ul>
+    </label>
+    <label class="text-white" for="forum">
+        <input type="checkbox" name="forum" id="forum">
+        💬 forums
+        <button onclick="((e) => {
+        document.getElementById('forum-details').classList.toggle('hidden');
+    })()" class="text-xs bg-gray-200 text-black w-4 h-4 text-center inline-block rounded-full">?</button>
+        <ul id="forum-details" class="hidden text-sm text-gray-500">
+            <li>reddit.com</li>
+            <li>quora.com</li>
+        </ul>
+    </label>
+    </div>
+
+
+
+    <script>
+        const categories = {
+                "design": ["behance.net", "dribbble.com"],
+                "shop": ["flipkart.in", "amazon.in"],
+                "forum": ["reddit.com", "quora.com"],
+                "code": ["github.com", "stackoverflow.com"]
+            };
+
+        function search() {
+            const lists = ["code", "design", "shop", "forum"]
+            let finalSites = [];
+            lists.forEach((list) => {
+                if (document.getElementById(list).checked) {
+                    finalSites.push.apply(finalSites, categories[list])
+                }
+            });
+            searchInList(document.querySelector("input").value, finalSites)
+        }
+
+        document.search = search
+
+        function searchInList(query, domains) {
+            sitesQuery = domains.map(d => `site:${d}`).join(" OR ")
+            url = "https://google.com/search?q=" +  encodeURIComponent(query + " " + sitesQuery)
+            window.open(url, '_blank').focus();
+        }
+    </script>
+</body>
+</html>
