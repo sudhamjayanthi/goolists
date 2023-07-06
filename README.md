@@ -11,4 +11,6 @@ lists for google search.
 
 ## how to customise
 
-go to the `<script>` tag in `index.html` and change the `categories` variable to create to your own lists
+- go to the `<script>` tag in `index.html`
+- change the `categories` variable to create to your own lists
+- deploy your own instance using vercel or feel free to open a PR and i'll merge if u have good lists
